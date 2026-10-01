@@ -12,7 +12,7 @@ BÁSICO
 [X] - Container para área de tarefas
 [X] - Tarefas
 [X] - Botão de concluir
-[] - Estilos
+[X] - Estilos
 
 INTERMEDIARIO
 [] - Persistencia
@@ -30,14 +30,20 @@ AVANÇADO
 
 */
 
+import "./App.css";
+
 import { Todo } from "./components/Todo/Todo";
 
 function App() {
   return (
     <div className="app">
-      <h1>To-do List</h1>
-      <h2>By Matheus Lacerda</h2>
-      <Todo />
+      <section className="wrapper">
+        <div className="container-title">
+          <h1 className="title">To-do List</h1>
+          <h2 className="sub-title">By Matheus Lacerda</h2>
+        </div>
+        <Todo />
+      </section>
     </div>
   );
 }

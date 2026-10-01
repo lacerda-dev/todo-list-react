@@ -1,0 +1,32 @@
+
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  background: url("./assets/images/background-todo.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrapper {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.container-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.title {
+    font-family: "Nothing You Could Do", cursive;
+    font-size: 4rem;
+}
+.sub-title {
+    font-family: "Pangolin", cursive;
+    font-size: 1rem;
+}

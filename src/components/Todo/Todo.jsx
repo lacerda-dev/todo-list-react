@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { List } from "../List/List";
+import './Todo.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
 export const Todo = () => {
   const [tasks, setTasks] = useState([]);
@@ -28,11 +31,11 @@ export const Todo = () => {
             placeholder="New task..."
           />
           <button type="submit" className="btn-new-task">
-            Create
+            <FontAwesomeIcon icon={faPencil} className="icon"/>
           </button>
         </form>
       </div>
-      <List tasks={tasks} deletTask={deletTask} />
+      {tasks.length > 0 && <List tasks={tasks} deletTask={deletTask} />}
     </div>
   );
 };
