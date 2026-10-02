@@ -23,7 +23,7 @@ export const List = ({ tasks, deletTask }) => {
           <p className="count-tasks">{tasks.length} tasks</p>
         ) : (
           <p className="count-tasks">
-            {filteredTasks.length} of {tasks.length} tasks
+            {filteredTasks.length} of {tasks.length} tasks found
           </p>
         )}
       </div>
