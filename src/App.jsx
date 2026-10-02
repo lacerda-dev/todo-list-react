@@ -15,9 +15,9 @@ BÁSICO
 [X] - Estilos
 
 INTERMEDIARIO
-[] - Persistencia
-[] - Adicionar tarefa precionando enter
-[] - Input de buscar tarefa (no topo do container da lista)
+[X] - Persistencia
+[X] - Adicionar tarefa precionando enter
+[X] - Input de buscar tarefa (no topo do container da lista)
 [] - Botão de editar tarefa (dentro de cada tarefa)
 [] - Estilos
 

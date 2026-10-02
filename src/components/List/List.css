@@ -1,4 +1,37 @@
 .container-list {
-    border-radius: 8px;
     margin-top: 24px;
+}
+.divider{
+    width: 50px;
+    height: 2px;
+    background-color: #FF01AF;
+    margin: auto;
+    margin-bottom: 24px;
+}
+.container-search{
+    display: flex;
+    position: relative;
+}
+.input-search{
+    width: 50%;
+    padding: 6px;
+    border: none;
+    background-color: #e4dbd49f;
+    border-radius: 6px;
+    font-family: "Pangolin", cursive;
+}
+.count-tasks {
+    font-size: .8rem;
+    font-family: "Pangolin", cursive;
+    color: #b6c1c3;
+    margin-left: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+.error-search {
+    font-size: .8rem;
+    margin-top: 12px;
+    margin-left: 14px;
+    color: #FF01AF;
 }

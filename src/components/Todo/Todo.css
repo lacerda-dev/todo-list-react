@@ -43,3 +43,9 @@
 .btn-new-task:hover {
     opacity: .8;
 }
+.error-task {
+    font-size: .7rem;
+    margin-left: 16px;
+    margin-top: 5px;
+    color: #FF01AF;
+}
