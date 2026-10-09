@@ -18,8 +18,8 @@ INTERMEDIARIO
 [X] - Persistencia
 [X] - Adicionar tarefa precionando enter
 [X] - Input de buscar tarefa (no topo do container da lista)
-[] - Botão de editar tarefa (dentro de cada tarefa)
-[] - Estilos
+[X] - Botão de editar tarefa (dentro de cada tarefa)
+[X] - Estilos
 
 AVANÇADO
 [] - Container de tarefas concluidas

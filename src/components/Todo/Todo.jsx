@@ -2,7 +2,7 @@ import { useState } from "react";
 import { List } from "../List/List";
 import "./Todo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 
 export const Todo = () => {
@@ -12,6 +12,8 @@ export const Todo = () => {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
   const [newTask, setNewTask] = useState("");
+  const [editValue, setEditValue] = useState("");
+  const [editing, setEditing] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("@tasks", JSON.stringify(tasks));
@@ -26,8 +28,21 @@ export const Todo = () => {
     }
   }
 
-  function deletTask(index) {
+  function completeTask(index) {
     setTasks(tasks.filter((task, i) => i !== index));
+  }
+
+  function editTask(index) {
+    if (editing === index) {
+      setTasks((prev) =>
+        prev.map((task, i) => (i === index ? editValue : task)),
+      );
+      setEditing(null);
+      setEditValue("");
+    } else {
+      setEditing(index);
+      setEditValue(tasks[index]);
+    }
   }
 
   return (
@@ -42,11 +57,20 @@ export const Todo = () => {
             placeholder="New task..."
           />
           <button type="submit" className="btn-new-task">
-            <FontAwesomeIcon icon={faPencil} className="icon" />
+            <FontAwesomeIcon icon={faPlus} className="icon" />
           </button>
         </form>
       </div>
-      {tasks.length > 0 && <List tasks={tasks} deletTask={deletTask} />}
+      {tasks.length > 0 && (
+        <List
+          tasks={tasks}
+          editing={editing}
+          completeTask={completeTask}
+          editTask={editTask}
+          editValue={editValue}
+          setEditValue={setEditValue}
+        />
+      )}
     </div>
   );
 };

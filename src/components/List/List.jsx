@@ -2,7 +2,14 @@ import { useState } from "react";
 import { Task } from "../Task/Task";
 import "./List.css";
 
-export const List = ({ tasks, deletTask }) => {
+export const List = ({
+  tasks,
+  editing,
+  editValue,
+  setEditValue,
+  completeTask,
+  editTask,
+}) => {
   const [searchTask, setSearchTask] = useState("");
   const filteredTasks = tasks.filter((task) =>
     task.toLowerCase().includes(searchTask.toLowerCase()),
@@ -28,7 +35,16 @@ export const List = ({ tasks, deletTask }) => {
         )}
       </div>
       {filteredTasks.map((task, index) => (
-        <Task key={index} task={task} index={index} deletTask={deletTask} />
+        <Task
+          key={index}
+          task={task}
+          index={index}
+          editing={editing}
+          editValue={editValue}
+          completeTask={completeTask}
+          editTask={editTask}
+          setEditValue={setEditValue}
+        />
       ))}
       {filteredTasks.length > 0 ? (
         ""
