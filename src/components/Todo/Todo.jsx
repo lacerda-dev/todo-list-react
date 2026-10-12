@@ -11,6 +11,13 @@ export const Todo = () => {
 
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
+
+  const [completed, setCompleted] = useState(() => {
+    const savedTasks = localStorage.getItem("@completed");
+
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
   const [newTask, setNewTask] = useState("");
   const [editValue, setEditValue] = useState("");
   const [editing, setEditing] = useState(null);
@@ -18,6 +25,10 @@ export const Todo = () => {
   useEffect(() => {
     localStorage.setItem("@tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem("@completed", JSON.stringify(completed));
+  }, [completed]);
 
   function createTask(e) {
     e.preventDefault();
@@ -29,7 +40,12 @@ export const Todo = () => {
   }
 
   function completeTask(index) {
+    setCompleted([...completed, tasks.filter((task, i) => i == index)]);
     setTasks(tasks.filter((task, i) => i !== index));
+  }
+
+  function deleteTask(index) {
+    setCompleted(completed.filter((task, i) => i !== index));
   }
 
   function editTask(index) {
@@ -61,6 +77,7 @@ export const Todo = () => {
           </button>
         </form>
       </div>
+
       {tasks.length > 0 && (
         <List
           tasks={tasks}

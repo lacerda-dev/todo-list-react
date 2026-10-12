@@ -22,10 +22,11 @@ INTERMEDIARIO
 [X] - Estilos
 
 AVANÇADO
-[] - Container de tarefas concluidas
+[] - Rota de tarefas concluidas
 [] - Tarefas concluidas
-[] - Editar botão de concluir tarefa para levar a tarefa concluida para nova lista
-[] - Botão de deletar tarefa
+[X] - Editar botão de concluir tarefa para levar a tarefa concluida para nova lista
+[] - Criar botão de restaurar
+[meio] - Botão de deletar tarefa
 [] - Estilos
 
 */
