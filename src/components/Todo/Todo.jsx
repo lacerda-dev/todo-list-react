@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { List } from "../List/List";
 import "./Todo.css";
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrashCan, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 
 export const Todo = () => {
@@ -21,6 +22,7 @@ export const Todo = () => {
   const [newTask, setNewTask] = useState("");
   const [editValue, setEditValue] = useState("");
   const [editing, setEditing] = useState(null);
+  const [trash, setTrash] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("@tasks", JSON.stringify(tasks));
@@ -30,22 +32,35 @@ export const Todo = () => {
     localStorage.setItem("@completed", JSON.stringify(completed));
   }, [completed]);
 
+  function trashOn() {
+    setTrash(!trash);
+  }
+
   function createTask(e) {
     e.preventDefault();
 
     if (newTask !== "") {
       setTasks([...tasks, newTask]);
       setNewTask("");
+      toast.success("New task added");
     }
   }
 
   function completeTask(index) {
-    setCompleted([...completed, tasks.filter((task, i) => i == index)]);
+    setCompleted([...completed, tasks[index]]);
     setTasks(tasks.filter((task, i) => i !== index));
+    toast.success("Moved to trash");
   }
 
   function deleteTask(index) {
     setCompleted(completed.filter((task, i) => i !== index));
+    toast.success("Task deleted");
+  }
+
+  function recoverTask(index) {
+    setTasks([...tasks, completed[index]]);
+    setCompleted(completed.filter((task, i) => i !== index));
+    toast.info("Recovered task");
   }
 
   function editTask(index) {
@@ -55,6 +70,7 @@ export const Todo = () => {
       );
       setEditing(null);
       setEditValue("");
+      toast.info("Edited task");
     } else {
       setEditing(index);
       setEditValue(tasks[index]);
@@ -63,31 +79,48 @@ export const Todo = () => {
 
   return (
     <div className="container-todo">
-      <div className="container-new-task">
-        <form onSubmit={createTask} className="form-new-task">
-          <input
-            className="input-task"
-            type="text"
-            value={newTask}
-            onChange={(event) => setNewTask(event.target.value)}
-            placeholder="New task..."
-          />
-          <button type="submit" className="btn-new-task">
-            <FontAwesomeIcon icon={faPlus} className="icon" />
+      <nav className="navigation">
+        {trash ? (
+          <button onClick={trashOn} className="menu">
+            {<FontAwesomeIcon icon={faHouse} />}
           </button>
-        </form>
-      </div>
-
-      {tasks.length > 0 && (
-        <List
-          tasks={tasks}
-          editing={editing}
-          completeTask={completeTask}
-          editTask={editTask}
-          editValue={editValue}
-          setEditValue={setEditValue}
-        />
+        ) : (
+          <button onClick={trashOn} className="menu">
+            {<FontAwesomeIcon icon={faTrashCan} />}
+          </button>
+        )}
+      </nav>
+      {!trash ? (
+        <div className="container-new-task">
+          <form onSubmit={createTask} className="form-new-task">
+            <input
+              className="input-task"
+              type="text"
+              value={newTask}
+              onChange={(event) => setNewTask(event.target.value)}
+              placeholder="New task..."
+            />
+            <button type="submit" className="btn-new-task">
+              <FontAwesomeIcon icon={faPlus} className="icon" />
+            </button>
+          </form>
+        </div>
+      ) : (
+        ""
       )}
+
+      <List
+        tasks={tasks}
+        completed={completed}
+        trash={trash}
+        editing={editing}
+        completeTask={completeTask}
+        recoverTask={recoverTask}
+        editTask={editTask}
+        editValue={editValue}
+        setEditValue={setEditValue}
+        deleteTask={deleteTask}
+      />
     </div>
   );
 };

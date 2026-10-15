@@ -22,22 +22,26 @@ INTERMEDIARIO
 [X] - Estilos
 
 AVANÇADO
-[] - Rota de tarefas concluidas
-[] - Tarefas concluidas
+[X] - Tarefas concluidas
 [X] - Editar botão de concluir tarefa para levar a tarefa concluida para nova lista
-[] - Criar botão de restaurar
+[X] - Criar botão de restaurar
 [meio] - Botão de deletar tarefa
-[] - Estilos
+[X] - Estilos
 
 */
 
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 
 import { Todo } from "./components/Todo/Todo";
 
 function App() {
   return (
     <div className="app">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+      />
       <section className="wrapper">
         <div className="container-title">
           <h1 className="title">To-do List</h1>
